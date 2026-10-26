@@ -39,8 +39,7 @@ ul {
   margin: 0;
   padding: 0px;
 }
-li,
-h3 {
+li {
   list-style: none;
 }
 input,
@@ -104,9 +103,6 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-li > * {
-  vertical-align: middle;
 }
 
 li > input[type='checkbox'] {
