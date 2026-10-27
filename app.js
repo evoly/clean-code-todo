@@ -43,7 +43,7 @@ const addTask = function () {
   const listItem = createNewTaskElement(taskInput.value);
 
   incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  bindTaskEvents(listItem, markTaskCompleted);
 
   taskInput.value = '';
 };
@@ -54,9 +54,9 @@ const editTask = function () {
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('label');
   const editBtn = listItem.querySelector('.edit');
-  const containsClass = listItem.classList.contains('edit-mode');
+  const isEditing = listItem.classList.contains('edit-mode');
 
-  if (containsClass) {
+  if (isEditing) {
     label.innerText = editInput.value;
     editBtn.innerText = 'Edit';
   } else {
@@ -73,16 +73,16 @@ const deleteTask = function () {
   ul.removeChild(listItem);
 };
 
-const taskCompleted = function () {
+const markTaskCompleted = function () {
   const listItem = this.parentNode;
   completedTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
+  bindTaskEvents(listItem, markTaskIncomplete);
 };
 
-const taskIncomplete = function () {
+const markTaskIncomplete = function () {
   const listItem = this.parentNode;
   incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  bindTaskEvents(listItem, markTaskCompleted);
 };
 
 addButton.onclick = addTask;
@@ -99,9 +99,9 @@ const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
 };
 
 for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
+  bindTaskEvents(incompleteTaskHolder.children[i], markTaskCompleted);
 }
 
 for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+  bindTaskEvents(completedTasksHolder.children[i], markTaskIncomplete);
 }
